@@ -49,6 +49,24 @@ public class EmployeeController {
         }
     }
     //UPDATE EMPLOYEE
+    @PutMapping("employee/{id}")
+    public ResponseEntity<?> updateEmployee(@PathVariable(value = "id") Long employeeId, @RequestBody Employee updatedEmployee){
+            Optional<Employee> yetToUpdate = employeeRepository.findById(employeeId);
+            if(yetToUpdate.isPresent()){
+                Employee yetToUpdateEmployee = yetToUpdate.get();
+                yetToUpdateEmployee.setEmail(updatedEmployee.getEmail());
+                yetToUpdateEmployee.setFirstName(updatedEmployee.getFirstName());
+                yetToUpdateEmployee.setLastName(updatedEmployee.getLastName());
+                yetToUpdateEmployee.setUserName(updatedEmployee.getUserName());
+
+                //SAVE THE UPDATED USER.
+                Employee updatedUser = employeeRepository.save(yetToUpdateEmployee);
+                return new ResponseEntity<Employee>( updatedEmployee, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("User Need to Update Not exist", HttpStatus.NOT_FOUND);
+
+            }
+    }
     //DELETE EMPLOYEE
 
 
