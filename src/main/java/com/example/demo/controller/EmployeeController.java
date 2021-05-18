@@ -61,7 +61,7 @@ public class EmployeeController {
 
                 //SAVE THE UPDATED USER.
                 Employee updatedUser = employeeRepository.save(yetToUpdateEmployee);
-                return new ResponseEntity<Employee>( updatedEmployee, HttpStatus.OK);
+                return new ResponseEntity<Employee>(updatedEmployee, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("User Need to Update Not exist", HttpStatus.NOT_FOUND);
 
