@@ -23,15 +23,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public List<Employee> getAllUser() {
+    public ResponseEntity<?> getAllUser() {
         List<Employee> employees = employeeRepository.findAll();
-        return employees;
+        if(employees.size() > 0){
+            return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No User Available", HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override
-    public Optional<Employee> getSpecificUser(Long id) {
+    public ResponseEntity<?> getSpecificUser(Long id) {
         Optional<Employee> employees = employeeRepository.findById(id);
-        return employees;
+        if(employees.isPresent()){
+            return new ResponseEntity<>(employees.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No User Available", HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override

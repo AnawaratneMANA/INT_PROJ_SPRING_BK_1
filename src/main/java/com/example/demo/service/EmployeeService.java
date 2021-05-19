@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface EmployeeService {
     //GET ALL METHOD
-    public List<Employee> getAllUser();
+    public ResponseEntity<?> getAllUser();
     //GET SPECIFIC
-    public Optional<Employee> getSpecificUser(Long id);
+    public ResponseEntity<?> getSpecificUser(Long id);
     //INSERT
     public ResponseEntity<?> setUser(Employee employee);
     //UPDATE

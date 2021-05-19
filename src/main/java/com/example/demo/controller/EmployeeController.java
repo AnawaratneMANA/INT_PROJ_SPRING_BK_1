@@ -24,54 +24,27 @@ public class EmployeeController {
     //GET EMPLOYEES
     @GetMapping("/employees")
     public ResponseEntity<?> getUser(){
-        List<Employee> employees = employeeService.getAllUser();
-        if(employees.size() > 0){
-            return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("No User Available", HttpStatus.NOT_FOUND);
-        }
+        return employeeService.getAllUser();
     }
     //GET EMPLOYEE BY ID
     @GetMapping("/employees/{id}")
     public ResponseEntity<?> getUserById(@PathVariable long id){
-        Optional<Employee> employees = employeeRepository.findById(id);
-        if(employees.isPresent()){
-            return new ResponseEntity<>(employees.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("No User Available", HttpStatus.NOT_FOUND);
-        }
+        return employeeService.getSpecificUser(id);
     }
 
     //SAVE EMPLOYEE
     @PostMapping("/employee")
     public ResponseEntity<?> createEmployee(@RequestBody Employee employee){
-        try{
-            employeeRepository.save(employee);
-            return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+        return employeeService.setUser(employee);
     }
     //UPDATE EMPLOYEE
     @PutMapping("employee/{id}")
     public ResponseEntity<?> updateEmployee(@PathVariable(value = "id") Long employeeId, @RequestBody Employee updatedEmployee){
-            Optional<Employee> yetToUpdate = employeeRepository.findById(employeeId);
-            if(yetToUpdate.isPresent()){
-                Employee yetToUpdateEmployee = yetToUpdate.get();
-                yetToUpdateEmployee.setEmail(updatedEmployee.getEmail());
-                yetToUpdateEmployee.setFirstName(updatedEmployee.getFirstName());
-                yetToUpdateEmployee.setLastName(updatedEmployee.getLastName());
-                yetToUpdateEmployee.setUserName(updatedEmployee.getUserName());
-
-                //SAVE THE UPDATED USER.
-                Employee updatedUser = employeeRepository.save(yetToUpdateEmployee);
-                return new ResponseEntity<Employee>(updatedEmployee, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("User Need to Update Not exist", HttpStatus.NOT_FOUND);
-
-            }
+            return employeeService.updateUser(employeeId, updatedEmployee);
     }
+
     //DELETE EMPLOYEE
+
 
 
 }
