@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.AuthenticationRequest;
 import com.example.demo.model.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 public class EmployeeController {
+
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -45,6 +49,15 @@ public class EmployeeController {
 
     //DELETE EMPLOYEE
 
-
-
+    //AUTHENTICATION - RETURN JWT
+//    @PostMapping("/employee/authentication")
+//    public ResponseEntity<?> createAuthToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+//        try {
+//            authenticationManager.authenticate({
+//
+//            })
+//        } catch (Exception e){
+//
+//        }
+//    }
 }
