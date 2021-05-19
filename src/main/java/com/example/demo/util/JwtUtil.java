@@ -4,12 +4,15 @@ import com.example.demo.model.Employee;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@Service
 public class JwtUtil {
 
     /**
@@ -37,9 +40,9 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    private String generateToken(Employee employeeDetails){
+    public String generateToken(UserDetails employeeDetails){
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, employeeDetails.getUserName());
+        return createToken(claims, employeeDetails.getUsername());
     }
 
     //CREATE A JWT TOKEN
@@ -50,8 +53,8 @@ public class JwtUtil {
 
     }
 
-    private Boolean validateToken(String token, Employee employeeDetails){
+    public Boolean validateToken(String token, UserDetails employeeDetails){
         final String username = extractUsername(token);
-        return (username.equals(employeeDetails.getUserName()) && !isTokenExpired(token));
+        return (username.equals(employeeDetails.getUsername()) && !isTokenExpired(token));
     }
 }
