@@ -7,7 +7,6 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 import java.util.Collection;
 import java.util.Collections;
 
@@ -17,11 +16,13 @@ public class SwaggerConfig {
     @Bean
     public Docket swaggerConfiguration() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(Details())
+                .pathMapping("/")
                 .select()
-                .paths(PathSelectors.ant("/api/v1/*"))
+                .paths(PathSelectors.regex("/.*"))
                 .apis(RequestHandlerSelectors.basePackage("com.example"))
-                .build()
-                .apiInfo(Details());
+                .build();
+
     }
 
 
@@ -31,7 +32,7 @@ public class SwaggerConfig {
                 "Nirmith Akash",
                 "1.0",
                 "",
-                new springfox.documentation.service.Contact("Nirmith Akash", "http://javabrains.io", "a@b.com"),
+                new springfox.documentation.service.Contact("Nirmith Akash", "http://google.com", "a@b.com"),
                 "Open",
                 "http://#",
                 Collections.emptyList());
