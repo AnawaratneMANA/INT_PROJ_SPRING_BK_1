@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *  This Service Class Need to be Altered and remove JPA.
+ */
+
 @Repository
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -19,23 +23,42 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public List<Employee> getAllUSer() {
+    public List<Employee> getAllUser() {
         List<Employee> employees = employeeRepository.findAll();
         return employees;
     }
 
     @Override
     public Optional<Employee> getSpecificUser(Long id) {
-        return Optional.empty();
+        Optional<Employee> employees = employeeRepository.findById(id);
+        return employees;
     }
 
     @Override
-    public Employee setUser(Employee employee) {
-        return null;
+    public ResponseEntity<?> setUser(Employee employee) {
+        try {
+            employeeRepository.save(employee);
+            return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override
-    public Employee updateUser(Long id, Employee updatedUser) {
-        return null;
+    public ResponseEntity<?> updateUser(Long id, Employee updatedUser) {
+        Optional<Employee> yetToUpdate = employeeRepository.findById(id);
+        if(yetToUpdate.isPresent()) {
+            Employee yetToUpdateEmployee = yetToUpdate.get();
+            yetToUpdateEmployee.setEmail(updatedUser.getEmail());
+            yetToUpdateEmployee.setFirstName(updatedUser.getFirstName());
+            yetToUpdateEmployee.setLastName(updatedUser.getLastName());
+            yetToUpdateEmployee.setUserName(updatedUser.getUserName());
+
+            //SAVE THE UPDATED USER.
+            employeeRepository.save(yetToUpdateEmployee);
+            return new ResponseEntity<Employee>(updatedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User Need to Update Not exist", HttpStatus.NOT_FOUND);
+        }
     }
 }

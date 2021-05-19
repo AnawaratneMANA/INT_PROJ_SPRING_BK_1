@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Employee;
 import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,13 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private EmployeeService employeeService;
+
     //GET EMPLOYEES
     @GetMapping("/employees")
     public ResponseEntity<?> getUser(){
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeService.getAllUser();
         if(employees.size() > 0){
             return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
         } else {
