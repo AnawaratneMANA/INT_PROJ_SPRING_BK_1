@@ -13,6 +13,7 @@ public class userDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        //  COMPARE THE NAME COMMING FROM THE PARAMETER.
         return new User("name", "name", new ArrayList<>());
     }
 }
