@@ -1,4 +1,5 @@
 package com.example.demo.util;
+import com.example.demo.filters.JwtRequestFilter;
 import com.example.demo.service.userDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,9 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
     private userDetails UserDetails;
 
     @Autowired
+    private JwtRequestFilter jwtRequestFilter;
+
+    @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService((UserDetails));
     }
@@ -42,6 +46,10 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/employee/auth")
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
