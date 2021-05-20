@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ResponseEntity<?> getAllUser() {
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.getUser();
         if(employees.size() > 0){
             return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
         } else {
@@ -34,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ResponseEntity<?> getSpecificUser(Long id) {
-        Optional<Employee> employees = employeeRepository.findById(id);
+        Optional<Employee> employees = employeeRepository.getUserById(id);
         if(employees.isPresent()){
             return new ResponseEntity<>(employees.get(), HttpStatus.OK);
         } else {
@@ -45,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public ResponseEntity<?> setUser(Employee employee) {
         try {
-            employeeRepository.save(employee);
+            employeeRepository.createEmployee(employee);
             return new ResponseEntity<Employee>(employee, HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -54,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ResponseEntity<?> updateUser(Long id, Employee updatedUser) {
-        Optional<Employee> yetToUpdate = employeeRepository.findById(id);
+        Optional<Employee> yetToUpdate = employeeRepository.getUserById(id);
         if(yetToUpdate.isPresent()) {
             Employee yetToUpdateEmployee = yetToUpdate.get();
             yetToUpdateEmployee.setEmail(updatedUser.getEmail());
@@ -63,7 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             yetToUpdateEmployee.setUserName(updatedUser.getUserName());
 
             //SAVE THE UPDATED USER.
-            employeeRepository.save(yetToUpdateEmployee);
+            employeeRepository.updateEmployee(id, yetToUpdateEmployee);
             return new ResponseEntity<Employee>(updatedUser, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("User Need to Update Not exist", HttpStatus.NOT_FOUND);

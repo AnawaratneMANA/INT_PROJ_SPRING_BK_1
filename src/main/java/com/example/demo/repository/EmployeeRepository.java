@@ -1,13 +1,17 @@
 package com.example.demo.repository;
 import com.example.demo.cstExceptions.CstAuthException;
+import com.example.demo.model.Employee;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository{
     //DONT USE JPA - CUSTOM METHOD FOR DB OPERATIONS.
-    ResponseEntity<?> createEmployee(String firstName, String lastName, String email, String password) throws CstAuthException;
-    ResponseEntity<?> getUser() throws CstAuthException;
-    ResponseEntity<?> getUserById(String firstName, String lastName, String email, String password) throws CstAuthException;
-    ResponseEntity<?> updateEmployee(String firstName, String lastName, String email, String password) throws CstAuthException;
+    ResponseEntity<?> createEmployee(Employee employee) throws CstAuthException;
+    List<Employee> getUser() throws CstAuthException;
+    Optional<Employee> getUserById(Long id ) throws CstAuthException;
+    Optional<Employee> updateEmployee(Long id, Employee employee) throws CstAuthException;
 }
