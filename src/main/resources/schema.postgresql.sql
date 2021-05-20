@@ -1,10 +1,19 @@
-DROP TABLE IF EXISTS customer;
+DROP DATABASE employees;
+DROP USER postgresql;
+CREATE USER postgresql with password 'postgresql';
+CREATE DATABASE employees  WITH template=template0 owner=postgresql;
+\CONNECT employees;
+ALTER DEFAULT PRIVILEGES GRANT  ALL ON tables to postgresql;
+ALTER DEFAULT PRIVILEGES GRANT ALL ON sequences  to postgresql;
 
-CREATE TABLE employee
+create table employees.emp
 (
-    EMP_ID Bigserial PRIMARY KEY NOT NULL,
-    F_NAME    varchar(100)          NOT NULL,
-    L_NAME    varchar(100)          NOT NULL,
-    U_NAME    varchar(100)          NOT NULL,
-    E_NAME    varchar(100)          NOT NULL
-);
+    user_id    integer primary key not null,
+    first_name varchar(50)         not null,
+    last_name varchar(50) not null,
+    email varchar(30) not null,
+    password text not null
+)
+
+
+
