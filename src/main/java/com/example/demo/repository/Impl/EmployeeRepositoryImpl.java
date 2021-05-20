@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 import static com.example.demo.repository.Impl.Quaries.CREATE_USER;
 
+@Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Autowired

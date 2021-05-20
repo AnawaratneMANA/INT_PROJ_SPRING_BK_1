@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +18,14 @@ import java.util.Optional;
  */
 
 @Repository
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
     private EmployeeRepository employeeRepository;
 
+    EmployeeServiceImpl(EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public ResponseEntity<?> getAllUser() {

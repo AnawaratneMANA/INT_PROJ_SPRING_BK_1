@@ -25,9 +25,6 @@ public class EmployeeController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
     private EmployeeService employeeService;
 
     @Autowired
