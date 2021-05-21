@@ -6,6 +6,7 @@ import com.example.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -17,8 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.example.demo.repository.Impl.Quaries.CREATE_USER;
-import static com.example.demo.repository.Impl.Quaries.SELECT_ALL_USERS;
+import static com.example.demo.repository.Impl.Quaries.*;
 
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -57,6 +57,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Optional<Employee> getUserById(Long id) throws CstAuthException {
+//        return (Employee) jdbcTemplate.queryForObject(SELECT_SPECIFIC_USERS, new Object[]{id}, new RowMapper<Employee>(){
+//            @Override
+//            public Employee mapRow()
+//        })
         return Optional.empty();
     }
 
