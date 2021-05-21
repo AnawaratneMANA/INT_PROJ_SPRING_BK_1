@@ -18,4 +18,7 @@ public class Quaries {
     //SELECT SPECIFIC QUERY
     public static final String SELECT_SPECIFIC_USERS =
             "SELECT * FROM emp_table WHERE user_id = ?";
+
+    //UPDATE EMPLOYEES QUERY.
+    public static final String UPDATE_USERS = "UPDATE emp_table set first_name = ?, last_name = ?, user_name  = ?, email = ? where user_id = ?";
 }
