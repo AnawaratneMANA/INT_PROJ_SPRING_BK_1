@@ -1,19 +1,15 @@
-DROP DATABASE employees;
-DROP USER postgresql;
-CREATE USER postgresql with password 'postgresql';
-CREATE DATABASE employees  WITH template=template0 owner=postgresql;
-\CONNECT employees;
-ALTER DEFAULT PRIVILEGES GRANT  ALL ON tables to postgresql;
-ALTER DEFAULT PRIVILEGES GRANT ALL ON sequences  to postgresql;
+DROP TABLE IF EXISTS emp_table;
 
-create table employees.emp
+CREATE TABLE emp_table
 (
     user_id    integer primary key not null,
     first_name varchar(50)         not null,
     last_name varchar(50) not null,
     user_name varchar(30) not null,
     email varchar(10) not null
-)
+);
+
+create sequence emp_table_seq increment 1 start 1
 
 
 
