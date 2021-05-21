@@ -2,11 +2,14 @@ package com.example.demo.repository.Impl;
 
 public class Quaries {
     public static final String CREATE_USER =
-            "insert into emp_table" +
+            "INSERT INTO emp_table" +
                     "(user_id, " +
                     "first_name, " +
                     "last_name, " +
                     "user_name, " +
                     " email)" +
-            " values(nextval('emp_table_seq'),?,?,?,?)";
+            " VALUES(nextval('emp_table_seq'),?,?,?,?)";
+
+    public static final String SELECT_ALL_USERS =
+            "SELECT * FROM emp_table";
 }

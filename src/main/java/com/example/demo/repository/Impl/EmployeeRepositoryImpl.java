@@ -12,10 +12,13 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.example.demo.repository.Impl.Quaries.CREATE_USER;
+import static com.example.demo.repository.Impl.Quaries.SELECT_ALL_USERS;
 
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -39,7 +42,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public List<Employee> getUser() throws CstAuthException {
-        return null;
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(SELECT_ALL_USERS);
+        List<Employee> result = new ArrayList<Employee>();
+        for(Map<String, Object> row: rows){
+            Employee emp =  new Employee();
+            emp.setUserName((String) row.get("user_name"));
+            emp.setFirstName((String) row.get("first_name"));
+            emp.setLastName((String) row.get("last_name"));
+            emp.setEmail((String) row.get("email"));
+            result.add(emp);
+        }
+        return result;
     }
 
     @Override
