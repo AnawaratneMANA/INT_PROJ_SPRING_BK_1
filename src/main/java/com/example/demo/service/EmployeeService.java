@@ -4,8 +4,6 @@ import com.example.demo.model.Employee;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
-
 public interface EmployeeService {
     //GET ALL METHOD
     public ResponseEntity<?> getAllUser();
