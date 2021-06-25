@@ -1,7 +1,7 @@
 package com.example.demo.repository.Impl;
 
 public class Quaries {
-    //INSERT INTO QUERY
+    //INSERT INTO QUERY - CREATE USER
     public static final String CREATE_USER =
             "INSERT INTO emp_table" +
                     "(user_id, " +
@@ -21,4 +21,16 @@ public class Quaries {
 
     //UPDATE EMPLOYEES QUERY.
     public static final String UPDATE_USERS = "UPDATE emp_table set first_name = ?, last_name = ?, user_name  = ?, email = ? where user_id = ?";
+
+
+    /**
+     * Form Data Submission related queries.
+     */
+
+    //INSERT QUERY.
+    public static final String CREATE_FORM_DATA = "INSERT INTO form_data_table " + "(form_data_id, " +
+            "user_id, " +
+            "project_id, " +
+            "project_name, " +
+            " VALUES(nextval('form_data_table_seq'),?,?,?)";
 }
