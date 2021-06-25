@@ -1,7 +1,5 @@
 package com.example.demo.repository.Impl;
-
 import com.example.demo.cstExceptions.CstAuthException;
-import com.example.demo.model.Employee;
 import com.example.demo.model.RequestForm;
 import com.example.demo.repository.FormDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-
+import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-
 import static com.example.demo.repository.Impl.Quaries.CREATE_FORM_DATA;
 
+@Repository
 public class FormDataRepositoryImpl implements FormDataRepository {
 
     @Autowired

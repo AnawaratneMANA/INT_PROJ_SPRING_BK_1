@@ -1,8 +1,5 @@
 package com.example.demo.controller;
-
-import com.example.demo.model.Employee;
 import com.example.demo.model.RequestForm;
-import com.example.demo.service.EmployeeService;
 import com.example.demo.service.FormDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +16,7 @@ public class FormDataController {
     FormDataService formDataService;
 
     //SAVE EMPLOYEE
-    @PostMapping("/employee")
+    @PostMapping("/form")
     public ResponseEntity<?> setFormData(@RequestBody RequestForm formData){
         return formDataService.setFormData(formData);
     }
