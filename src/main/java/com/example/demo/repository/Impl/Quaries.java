@@ -28,9 +28,10 @@ public class Quaries {
      */
 
     //INSERT QUERY.
-    public static final String CREATE_FORM_DATA = "INSERT INTO form_data_table " + "(form_data_id, " +
-            "user_id, " +
-            "project_id, " +
-            "project_name, " +
+    public static final String CREATE_FORM_DATA = "INSERT INTO form_data_table " +
+            "(id, " +
+            "userId, " +
+            "projectId, " +
+            "projectName) " +
             " VALUES(nextval('form_data_table_seq'),?,?,?)";
 }

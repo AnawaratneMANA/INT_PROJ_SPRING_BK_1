@@ -2,7 +2,6 @@ package com.example.demo.controller;
 import com.example.demo.model.AuthenticationRequest;
 import com.example.demo.model.AuthenticationResponse;
 import com.example.demo.model.Employee;
-import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
 import com.example.demo.service.userDetails;
 import com.example.demo.util.JwtUtil;
@@ -56,7 +55,6 @@ public class EmployeeController {
     }
 
     //DELETE EMPLOYEE
-
 
     //AUTHENTICATION - RETURN JWT
     @PostMapping("/employee/auth")
