@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.model.RequestForm;
+import com.example.demo.model.RequestFormResponse;
 import com.example.demo.service.FormDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,16 @@ public class FormDataController {
 
     //SAVE EMPLOYEE
     @PostMapping("/form")
-    public ResponseEntity<?> setFormData(@RequestBody RequestForm formData){
-        return formDataService.setFormData(formData);
+    public String setFormData(@RequestBody RequestFormResponse formData){
+        try{
+            for(RequestForm requestForm: formData.getArray()){
+                formDataService.setFormData(requestForm);
+            }
+            return "Data Inserted";
+        } catch (Exception e){
+            System.out.println("Error Inserting Data");
+        }
+        return "400";
     }
 
 }
