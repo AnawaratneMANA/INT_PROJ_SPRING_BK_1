@@ -3,12 +3,11 @@ import com.example.demo.model.RequestForm;
 import com.example.demo.model.RequestFormResponse;
 import com.example.demo.service.FormDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1")
 public class FormDataController {
@@ -18,16 +17,17 @@ public class FormDataController {
 
     //SAVE EMPLOYEE
     @PostMapping("/form")
-    public String setFormData(@RequestBody RequestFormResponse formData){
+    public ResponseEntity<?> setFormData(@RequestBody RequestFormResponse formData){
+        System.out.println(formData);
         try{
             for(RequestForm requestForm: formData.getArray()){
                 formDataService.setFormData(requestForm);
             }
-            return "Data Inserted";
+            return new ResponseEntity<>("Items Added Successfully", HttpStatus.OK);
         } catch (Exception e){
             System.out.println("Error Inserting Data");
+            return new ResponseEntity<>("Error Inserting Items", HttpStatus.NOT_FOUND);
         }
-        return "400";
     }
 
 }
